@@ -139,13 +139,15 @@ namespace ConsoleCalculator
             double b = ConvertToDouble("Ange värde 2.  "); if (NumberParseError == true) return;  
 
             Console.WriteLine();
-            if (a == 0 && b == 0)
+
+            // Infinity test.
+            if (a == 0 && b == 0 || b == 0) // a & b can't be zero OR only b cant be zero.
             {
                 Console.WriteLine("Kan inte beräkna division med noll!");
                 Console.WriteLine("Försök inte. Min lilla hjärna exploderar.");
-                Console.WriteLine("Vill du prova ?  J / N  ?");
+                Console.WriteLine("Vill du försöka ändå?  Ja / Nej  ");
                 string s = Console.ReadLine().ToLower();
-                if (s == "j")
+                if (s == "j" || s == "ja")
                 {
                     Boom();
                 }
@@ -153,13 +155,7 @@ namespace ConsoleCalculator
                 return;
             }
 
-            if (b == 0)
-            {
-                Console.WriteLine("Resultat: Division by zero result in infinity!");
-                Foot(); return;
-            }
             Console.WriteLine("Resultat: " + a + " / " + b + " = " + (a / b));
-
             Foot();
         }
 
@@ -237,7 +233,12 @@ namespace ConsoleCalculator
             if (s == "") return;
             double result = ParseFormula(s);
             Console.WriteLine();
-            Console.WriteLine("Resultat av din formel [" + s + "] blir " + result);
+            Console.Write("Resultat av din formel [ ");
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.Write ( s );
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write(" ] blir ");
+            Console.Write(result);
             Console.WriteLine();
             Console.WriteLine();
             Foot();
